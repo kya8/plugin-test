@@ -15,7 +15,7 @@ do_things_with_plugin(const char* filename) noexcept
     if (!dso.is_open()) {
         return false;
     }
-    const auto plugin_func = static_cast<PluginFunc>(dso.get_sym("plugin_func"));
+    const auto plugin_func = reinterpret_cast<PluginFunc>(dso.get_sym("plugin_func"));
     if (!plugin_func) {
         return false;
     }
