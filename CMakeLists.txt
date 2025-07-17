@@ -16,3 +16,4 @@ target_link_libraries(plugin-test PRIVATE ${CMAKE_DL_LIBS})
 
 add_library(plugin SHARED plugin.cpp)
 target_compile_definitions(plugin PRIVATE PLUGIN_SOURCE)
+set_target_properties(plugin PROPERTIES PREFIX "")
