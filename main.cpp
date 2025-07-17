@@ -19,8 +19,14 @@ do_things_with_plugin(const char* filename) noexcept
     if (!plugin_func) {
         return false;
     }
-
     plugin_func();
+
+    const auto get_plugin_interface = reinterpret_cast<PluginInterfaceFunc>(dso.get_sym("get_plugin_interface"));
+    if (get_plugin_interface) {
+        const auto interface = get_plugin_interface();
+        interface->greet();
+    }
+
     return true;
 }
 

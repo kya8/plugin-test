@@ -7,6 +7,8 @@
 
 typedef void(*PluginFunc)();
 
+// Plain functions
+// Or, functions to create ctx, and operate the ctx.
 struct PluginContent {
     void(*greet)();
     const char* msg;
@@ -16,6 +18,7 @@ typedef const PluginContent* (*PluginContentFunc)();
 
 #ifdef __cplusplus
 
+// Suitable for plugin functionalities that require a ctx/instance.
 class PluginInterface {
 public:
     virtual void greet() = 0;
