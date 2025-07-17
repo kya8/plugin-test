@@ -23,7 +23,10 @@ struct PluginImpl : PluginInterface {
         plugin_func();
     }
 
-    ~PluginImpl() noexcept {
+    PluginImpl() noexcept {
+        std::puts("Creating PluginImpl...");
+    }
+    ~PluginImpl() noexcept override {
         std::puts("Destroying PluginImpl...");
     }
 };
