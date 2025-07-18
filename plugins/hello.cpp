@@ -25,6 +25,8 @@ void plugin_func()
     std::puts("Hello, from plugin!");
 }
 
+namespace {
+
 struct PluginImpl : PluginInterface {
     void greet() noexcept override {
         plugin_func();
@@ -37,6 +39,8 @@ struct PluginImpl : PluginInterface {
         std::puts("Destroying PluginImpl...");
     }
 };
+
+}
 
 #ifdef _MSC_VER
 PluginInterface* get_plugin_interface()
