@@ -47,8 +47,9 @@ int main(int argc, char** argv) try
     for (const auto& entry : fs::directory_iterator(plugin_dir)) {
 #ifdef _WIN32
         const fs::path ext = ".dll";
-#elif defined(__APPLE__) && defined(__MACH__)
-        const fs::path ext = ".dylib";
+// bundles on macOS are commonly *.so
+// #elif defined(__APPLE__) && defined(__MACH__)
+//         const fs::path ext = ".dylib";
 #else
         const fs::path ext = ".so";
 #endif
