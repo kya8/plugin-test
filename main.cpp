@@ -30,7 +30,7 @@ do_things_with_plugin(const char* filename) noexcept
     return true;
 }
 
-};
+}
 
 int main(int argc, char** argv) try
 {
