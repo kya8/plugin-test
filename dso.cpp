@@ -6,6 +6,21 @@
 #include <dlfcn.h>
 #endif
 
+namespace {
+
+void* load_dso(const char* name) noexcept
+{
+#ifdef _WIN32
+    return LoadLibraryExA(name, nullptr, 0);
+#else
+    return dlopen(name, RTLD_NOW);
+#endif
+}
+
+}
+
+Dso::Dso(const char* name) noexcept : handle_(load_dso(name)) {}
+
 Dso::~Dso() noexcept
 {
     close();
@@ -31,11 +46,7 @@ bool Dso::open(const char* name) noexcept
     if (handle_) {
         return false;
     }
-#ifdef _WIN32
-    handle_ = LoadLibraryExA(name, nullptr, 0);
-#else
-    handle_ = dlopen(name, RTLD_NOW);
-#endif
+    handle_ = load_dso(name);
     return handle_ != nullptr;
 }
 

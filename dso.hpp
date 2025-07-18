@@ -4,6 +4,7 @@
 class Dso {
 public:
     Dso() noexcept = default;
+    Dso(const char* name) noexcept;
     ~Dso() noexcept;
     // Can't copy ourselves.
     Dso(const Dso&) = delete;
