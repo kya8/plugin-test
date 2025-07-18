@@ -25,8 +25,11 @@ do_things_with_plugin(const char* filename) noexcept
     if (get_plugin_interface) {
         const auto interface = get_plugin_interface();
         interface->greet();
+#ifdef _MSC_VER
+        const auto plugin_destroy = reinterpret_cast<PluginInterfaceDestroyFunc>(dso.get_sym("destroy_plugin_interface"));
+        plugin_destroy(interface);
+#endif
     }
-
     return true;
 }
 

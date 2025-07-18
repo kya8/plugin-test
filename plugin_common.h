@@ -25,7 +25,15 @@ public:
     virtual ~PluginInterface() = default;
 };
 
+// The caller program and the plugin dynlib can be built by different compilers,
+// but to use the C++ interface, the C++ ABIs of both sides must be compatible.
+// So if one is built with MSVC, we assume the other is built with MSVC.
+#ifdef _MSC_VER
+using PluginInterfaceFunc = PluginInterface* (*)();
+using PluginInterfaceDestroyFunc = void(*)(PluginInterface*);
+#else
 using PluginInterfaceFunc = std::unique_ptr<PluginInterface> (*)();
+#endif
 
 #endif
 
